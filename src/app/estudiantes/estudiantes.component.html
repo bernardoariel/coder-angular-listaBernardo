@@ -1,41 +1,47 @@
 <div class="card p-5">
-  <div class="col-8">
-    <div class="card-header bg-info">
-        <h3 class="text-center">Tabla de estudiantes</h3>
-    </div>
-    <div class="card-body">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Apellido</th>
-            <th>Nombre</th>
-            <th>Curso</th>
-            <th>Promedio</th>
-            <th>Fin de Curso</th>
-            <th>Estado</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-          [ngClass]="{'bg-warning': estudiante === estudianteMaxPuntuacion}"
-            *ngFor="let estudiante of estudiantesPromedio">
-            <td>{{ estudiante.id }}</td>
-            <td appFontWeight>{{ estudiante.apellido | uppercase}}</td>
-            <td appItalic>{{ estudiante.nombre | titlecase }}</td>
-            <td>{{ estudiante.curso | titlecase }}</td>
-            <td>{{ estudiante.puntuacion | number:'.0-2' }}</td>
-            <td>{{ estudiante.fechaFinCurso | date:'MMMM - dd'}}</td>
-            <td
-              class="text-white fw-semibold opacity-75 text-center"
-              [ngClass]="estudiante.puntuacion < 65 ? 'bg-danger' : 'bg-success'">
-              {{ estudiante.puntuacion < 65 ? 'REPROBADO' : 'APROBADO'}}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div *ngIf="isLoading; else divCargado">
+    <h2 class="text-center">Cargando ... </h2>
   </div>
+  <ng-template #divCargado>
+    <div class="col-8">
+      <div class="card-header bg-info">
+          <h3 class="text-center">Tabla de estudiantes</h3>
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Apellido</th>
+              <th>Nombre</th>
+              <th>Curso</th>
+              <th>Promedio</th>
+              <th>Fin de Curso</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+            [ngClass]="{'bg-warning': estudiante === estudianteMaxPuntuacion}"
+              *ngFor="let estudiante of estudiantesPromedio">
+              <td>{{ estudiante.id }}</td>
+              <td appFontWeight>{{ estudiante.apellido | uppercase}}</td>
+              <td appItalic>{{ estudiante.nombre | titlecase }}</td>
+              <td>{{ estudiante.curso | titlecase }}</td>
+              <td>{{ estudiante.puntuacion | number:'.0-2' }}</td>
+              <td>{{ estudiante.fechaFinCurso | date:'MMMM - dd'}}</td>
+              <td
+                class="text-white fw-semibold opacity-75 text-center"
+                [ngClass]="estudiante.puntuacion < 65 ? 'bg-danger' : 'bg-success'">
+                {{ estudiante.puntuacion < 65 ? 'REPROBADO' : 'APROBADO'}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </ng-template>
+
 
 </div>
 

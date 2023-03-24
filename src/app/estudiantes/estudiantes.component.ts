@@ -1,4 +1,4 @@
-import { Component, SimpleChanges } from '@angular/core';
+import { Component, SimpleChanges,OnInit } from '@angular/core';
 import { IEstudiante } from '../interface/iEstudiante';
 
 
@@ -8,9 +8,9 @@ import { IEstudiante } from '../interface/iEstudiante';
   templateUrl: './estudiantes.component.html',
   styleUrls: ['./estudiantes.component.css']
 })
-export class EstudiantesComponent {
+export class EstudiantesComponent implements OnInit{
 
-
+  isLoading: boolean = true;
   estudiantesPromedio:IEstudiante[] = [
     { id:1,nombre: "Juan", apellido: "García", curso: "Introducción a JavaScript", puntuacion: 80.3513,fechaFinCurso:new Date("2023-02-01") },
     { id:2,nombre: "María", apellido: "López", curso: "Programación con JavaScript", puntuacion: 60.4540,fechaFinCurso:new Date("2022-11-15") },
@@ -30,14 +30,12 @@ export class EstudiantesComponent {
       this.estudianteMaxPuntuacion = this.estudiantesPromedio.reduce((prev, current) => (prev.puntuacion > current.puntuacion) ? prev : current);
     }
   }
-
-  cambiarPuntuaciones() {
-    // Iterar sobre cada estudiante en el arreglo y modificar su puntuación
-    this.estudiantesPromedio.forEach(estudiante => {
-      // Generar un número aleatorio entre 50 y 100 para la nueva puntuación
-      const nuevaPuntuacion = Math.random() * (100 - 50) + 50;
-      estudiante.puntuacion = nuevaPuntuacion;
-    });
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.isLoading = false
+    }, 2000);
   }
+
+
 
 }
