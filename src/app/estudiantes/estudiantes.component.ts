@@ -25,11 +25,11 @@ export class EstudiantesComponent implements OnInit{
   ];
   estudianteMaxPuntuacion: any = this.estudiantesPromedio.reduce((prev, current) => (prev.puntuacion > current.puntuacion) ? prev : current);
 
-  ngOnChanges(changes: SimpleChanges) {
+/*   ngOnChanges(changes: SimpleChanges) {
     if (changes['estudiantesPromedio']) {
       this.estudianteMaxPuntuacion = this.estudiantesPromedio.reduce((prev, current) => (prev.puntuacion > current.puntuacion) ? prev : current);
     }
-  }
+  } */
   ngOnInit(): void {
     setTimeout(() => {
       this.isLoading = false
